@@ -1,5 +1,7 @@
 #基础镜像为centos
 FROM centos:7
+#添加免费商用字体思源宋体
+ADD SiYuanSong.ttf /
 RUN cd /tmp && \
     #安装wget
     yum -y install wget && \
@@ -13,6 +15,8 @@ RUN cd /tmp && \
     yum install -y java-1.8.0-openjdk.x86_64 && \
     #清除yum缓存
     yum clean all && \
+    #移动字体到office下
+    mv -f /SiYuanSong.ttf /usr/share/fonts/ &&\
     #删除压缩包、解压缩的文件
     rm -Rf Apache_OpenOffice*.tar.gz zh-CN
 #暴露接口
